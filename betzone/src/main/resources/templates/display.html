@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Landon Reservations</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/ui-darkness/jquery-ui.css"/>
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <!--    <link rel="stylesheet" href="css/site.css"/>-->
+</head>
+<body>
+<div class="jumbotron container-fluid">
+    <h1>Welcome to the BetZone</h1>
+    <!--<p>Date: <input type="text" id="datepicker"/></p>-->
+</div>
+<table class="table table-dark" >
+    <thead>
+    <tr>
+        <td th:text="${date}"></td>
+        <td>Game odds</td>
+    </tr>
+    </thead>
+
+    <tbody th:each="betsDisplay: ${betsDisplayList}">
+    <tr>
+        <td th:text="${betsDisplay.homeTeamName}"> home team name</td>
+        <td th:text="${betsDisplay.homeResult}">homeresult</td>
+    </tr>
+    <tr  >
+        <td th:text="${betsDisplay.awayTeamName}"> away team name</td>
+        <td th:text="${betsDisplay.awayResult}">awayresult</td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="container-fluid" th:each="betsDisplay: ${betsDisplayList}">
+    <figure class="figure container-fluid">
+        <div class="col-sm">
+            <div class="row">
+                <p th:text="${betsDisplay.homeTeamName}"> home</p>
+                <p th:text="${betsDisplay.homeResult}">home results</p>
+                <p th:text="${betsDisplay.date}"></p>
+
+                <!--    <p>-->
+                <!--        <span th:text="${betsDisplay.awayTeamName}"> home results</span>-->
+                <!--        <span th:text="${betsDisplay.awayResult}">away results </span>-->
+                <!--    </p>-->
+            </div>
+            <div class="row">
+                <p th:text="${betsDisplay.awayTeamName}"> away</p>
+                <p th:text="${betsDisplay.awayResult}">away results </p>
+            </div>
+        </div>
+    </figure>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<!--<script src="js/site.js"></script>-->
+</body>
+</html>

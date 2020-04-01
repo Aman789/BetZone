@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
+<head th:fragment="head-fragment">
+    <meta charset="UTF-8">
+    <title>BetZone</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="../static/css/site.css" th:href="@{/css/site.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/ui-darkness/jquery-ui.css"/>
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="home.css">
+</head>
+<body>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/homepage">BETZONE</a>
+    <ul class="nav-tabs nav px-3" id="myTab">
+        <li class="nav-item text-nowrap justify-content-center">
+            <a class="nav-link navbar-text px-3" data-toggle="tab" href="#sports" >
+                Sports</a>
+        </li>
+        <li class="nav-item text-nowrap justify-content-center">
+        <a class="nav-link navbar-text px-3" data-toggle="tab" href="#livegames">
+            Live</a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap justify-content-end" id="regbar">
+            <a class="nav-link navbar-text px-2" id="login" href="/login">Login</a>
+            <a class="nav-link navbar-text" id="signup" href="#">Signup</a>
+        </li>
+        <li class="nav-item" sec:authorize="isAnonymous()">
+            <a class="nav-link" th:href="@{/login}">Login</a>
+        </li>
+        <li class="nav-item" sec:authorize="isAuthenticated()">
+            <a class="nav-link" th:href="@{/logout}">Logout</a>
+        </li>
+    </ul>
+</nav>
+<div layout:fragment="content">
+<div class="container-fluid main-content">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block sidebar" style="background: rgba(112,112,112, 1)">
+           <div class="sidebar-sticky">
+               <ul class="nav flex-column">
+                   <li class="nav-item">
+                       <a class="nav-link " href="/basketball">Basketball</a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link active" href="#">Soccer</a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link active" href="#">Tennis</a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link active" href="#">Baseball</a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link active" href="#">Hockey</a>
+                   </li>
+               </ul>
+           </div>
+        </nav>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 p-0">
+        <div class="tab-content w-100">
+            <div class="tab-pane fade show active" id="sports">
+                <div class="jumbotron" style="margin-bottom: 0px">
+                    <h1 >OFFER 10/10</h1>
+                </div>
+                <nav class="navbar sticky-top flex-md-nowrap" style="background: lightseagreen">
+                    <h4 class="h4">Basketball</h4>
+                </nav>
+                <div class="row" th:each="betsDisplay: ${betsDisplayList}">
+                    <div class="col">
+                        <ul class="list-unstyled">
+                            <div class="row">
+                            <div class="col">
+                            <li th:text="${betsDisplay.getAwayTeamName()}" class="p-1">away team</li>
+                            </div>
+                                <div class="col">
+                            <li th:text="${betsDisplay.getAwayOdds()}" class="p-1">away odds</li>
+                                </div>
+                                <div class="col">
+                                    <li th:text="${betsDisplay.getDescription()}" class="p-1">away odds</li>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <li th:text="${ betsDisplay.getHomeTeamName()}" class="p-1">Home team</li>
+                                </div>
+                                <div class="col">
+                                    <li th:text="${ betsDisplay.getHomeOdds()}" class="p-1">Home odds</li>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <ul class="list-unstyled">
+                            <li th:text="${betsDisplay.getAwayResult()}" class="p-1">away results</li>
+                            <li th:text="${ betsDisplay.getHomeResult()}" class="p-1">home results</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="livegames" >
+                <br>
+                <p>
+                    Showing live games
+                </p>
+            </div>
+        </div>
+    </main>
+    </div>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
